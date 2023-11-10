@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "reborn"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+aiogram = "^3.0.0"
+asyncpg = "^0.28.0"
+sqlalchemy = "^2.0.21"
+alembic = "^1.12.0"
+mypy = "^1.5.1"
+pathvalidate = "^3.2.0"
+nats-py = "^2.4.0"
+ormsgpack = "^1.2.6"
+python-dotenv = "^1.0.0"
+redis = "^5.0.1"
+zstd = "^1.5.5.1"
+uuid6 = "^2023.5.2"
+taskiq = "^0.9.2"
+taskiq-nats = "^0.3.1"
+faststream = {extras = ["nats"], version = "^0.2.1"}
+loguru = "^0.7.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
