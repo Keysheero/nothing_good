@@ -1,3 +1,4 @@
+import logging
 from typing import Any, Awaitable, Callable
 
 from aiogram import BaseMiddleware
@@ -5,6 +6,8 @@ from aiogram.types import Message, CallbackQuery
 
 from src.bot.schemas.dispatcher_data import DispatcherData
 from src.database.database import Database
+
+logger = logging.getLogger(__name__)
 
 
 class ArchiveUser(BaseMiddleware):
@@ -22,4 +25,6 @@ class ArchiveUser(BaseMiddleware):
                               chat_id=event.chat.id
                               )
             await db.session.commit()
+            logger.info(f"New user: {event.from_user.id} was added to database")
+
         return await handler(event, data)

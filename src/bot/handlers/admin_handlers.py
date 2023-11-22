@@ -17,5 +17,5 @@ router.callback_query.middleware(DatabaseMiddleware())
 
 @router.message(F.text[:9] == 'broadcast')
 async def broadcast_handler(message: Message, db: Database, jetstream: JetStreamContext):
-    send_data = message.text[9:]
-    await broadcast_task(jetstream, db, send_data)
+    send_data: str = message.text[9:]
+    await broadcast_task(jetstream, db, send_data, target='user')

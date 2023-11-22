@@ -19,9 +19,10 @@ router.callback_query.middleware(ArchiveUser())
 
 @router.message(CommandStart())
 async def command_start_handler(message: Message, keyboard: Keyboard, state: FSMContext):
-    await message.answer('Приветсвую тебя в этом замечательном боте'
-                         'Бот предназначен для рассылки различных сообщений',
-                         reply_markup=keyboard.create_keyboard(channels='Каналы', posts='Посты', width=1))
+    await message.answer('Приветсвую тебя в этом замечательном боте\n\n'
+                         'Бот предназначен для рассылки различных сообщений\n\n'
+                         'Выберите до 5 каналов, и рассылайте по ним сообщения',
+                         reply_markup=keyboard.create_keyboard(channels='Каналы📬', posts='Посты📩', width=1))
     await state.clear()
 
 # @router.message(Command=['/help'])

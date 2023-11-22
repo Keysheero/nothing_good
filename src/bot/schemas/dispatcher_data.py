@@ -14,5 +14,5 @@ class DispatcherData(TypedDict):
 
     pool: async_sessionmaker
     keyboard: Keyboard
-    db: Database
-    bot: Bot
+    db: Database | None
+    bot: Bot | None

@@ -46,4 +46,5 @@ class UserRepository(Repository[User]):
         statement = select(self.type_model)
         if order_by:
             statement = statement.order_by(order_by)
-        return (await self.session.scalars(statement)).all()
+        result = await self.session.execute(statement)
+        return [user_id for (user_id,) in result.all()]

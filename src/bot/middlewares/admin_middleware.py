@@ -8,7 +8,6 @@ from src.config import conf
 
 
 class CheckAdmin(BaseMiddleware):
-    """This middleware throw a Database class to handler"""
 
     async def __call__(
             self,

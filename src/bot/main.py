@@ -1,9 +1,9 @@
 import asyncio
 import logging
+import sys
 
 import nats
 from aiogram import Bot, Dispatcher
-from loguru import logger
 from nats.aio.client import Client
 from nats.js import JetStreamContext
 from redis.asyncio import Redis
@@ -12,7 +12,6 @@ from faststream.nats import NatsBroker
 from faststream import FastStream
 
 from src.bot.keyboards.keyboard import Keyboard
-from src.bot.utils.log import InterceptHandler
 from src.database.database import get_async_sessionmaker
 from src.bot.dispatcher import get_dispatcher, get_redis_storage
 from src.config import conf
@@ -23,22 +22,14 @@ from src.services.nats.worker import user_nats_polling, channel_nats_polling
 async def main() -> None:
     logging.basicConfig(
         handlers=[
-            InterceptHandler()
+            logging.FileHandler('debug.log', encoding='utf-8', ),
+            logging.StreamHandler(sys.stdout)
         ],
         level='DEBUG',
-        force=True
+        force=True,
+        format="%(levelname)-8s [%(asctime)s] :: %(name)s : %(message)s"
     )
-
-    logger.add(
-        sink='../../../debug.log',
-        format='{time} | {level} | {message}',
-        level='DEBUG',
-        enqueue=True,
-        colorize=True,
-        encoding='utf-8',
-        rotation='10 MB',
-        compression='zip'
-    )
+    logger = logging.getLogger(__name__)
 
     storage = get_redis_storage(
         redis=Redis(
@@ -78,7 +69,6 @@ async def main() -> None:
         await storage.close()
         await bot.session.close()
         await nats_client.drain()
-        await logger.complete()
 
 
 if __name__ == '__main__':

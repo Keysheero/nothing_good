@@ -19,13 +19,14 @@ class ChannelRepository(Repository[Channel]):
                             user_fk=user_fk)
         )
 
-    async def delete(self, user_fk) -> None:
-        statement = delete(self.type_model).where(self.type_model.user_fk == user_fk)
-        await self.session.execute(statement)
+    async def delete(self, user_fk, channel_id) -> None:
+        statement = delete(self.type_model).where(
+            (self.type_model.user_fk == user_fk) & (self.type_model.channel_id == channel_id)
+        )
 
+        await self.session.execute(statement)
 
     async def get_channels_id(self, user_fk: int) -> list[str]:
         statement: Select[tuple[Any]] = select(self.type_model.channel_id).where(self.type_model.user_fk == user_fk)
         result = await self.session.execute(statement)
-        return [channel_id for (channel_id, ) in result.all()]
-
+        return [channel_id for (channel_id,) in result.all()]

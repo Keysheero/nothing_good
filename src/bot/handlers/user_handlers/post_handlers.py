@@ -20,7 +20,7 @@ router.callback_query.outer_middleware(DatabaseMiddleware())
 router.callback_query.middleware(ArchiveUser())
 
 
-@router.message(F.text == 'Посты')
+@router.message(F.text == 'Посты📩')
 async def start_post_handler(message: Message, state: FSMContext, keyboard: Keyboard):
     await message.answer("Вы выбрали раздел посты, отправьте боту пост и он разошлет куда надо",
                          reply_markup=keyboard.create_inline_keyboard(
