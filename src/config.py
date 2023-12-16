@@ -55,7 +55,7 @@ class Configuration:
     db = DatabaseConfig()
     bot = BotConfig()
     redis = RedisConfig()
-    nats_server = 'nats://localhost:4222'
+    nats_server = 'nats://nats:4222'
     admin_ids = ['822248811', '827961067']
 
 

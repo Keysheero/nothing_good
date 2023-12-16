@@ -11,7 +11,7 @@ class User(BaseModel):
     chat_id: Mapped[int] = mapped_column(BigInteger, unique=True, nullable=False)
     user_name: Mapped[str] = mapped_column(String(length=32))
 
-    channel: Mapped["Channel"] = relationship(back_populates='user', uselist=False)
+    channels: Mapped[list["Channel"]] = relationship(back_populates='user', uselist=True)
 
     def __repr__(self) -> str:
         return f'User:{self.user_name}:{self.user_id}'

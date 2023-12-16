@@ -38,6 +38,6 @@ def get_dispatcher(
     for router in routers:
         dp.include_router(router)
 
-    # Register middlewares
-
     return dp
+
+

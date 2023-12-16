@@ -38,9 +38,6 @@ async def main() -> None:
             port=conf.redis.port,
         )
     )
-    broker = NatsBroker("nats://localhost:4222")
-
-    app = FastStream(broker)
 
     bot: Bot = Bot(token=conf.bot.BOT_TOKEN)
     dp: Dispatcher = get_dispatcher(storage=storage)

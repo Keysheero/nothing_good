@@ -9,7 +9,7 @@ class Channel(BaseModel):
 
     channel_id: Mapped[int] = mapped_column(String(length=32), primary_key=True)
 
-    user: Mapped["User"] = relationship(back_populates='channel', uselist=False)
+    user: Mapped["User"] = relationship(back_populates='channels', uselist=False)
     user_fk: Mapped[int] = mapped_column(ForeignKey('users.user_id'))
 
     def __repr__(self) -> str:
